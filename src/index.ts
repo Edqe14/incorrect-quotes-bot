@@ -1,7 +1,6 @@
-import { join } from 'path';
 import dotenv from 'dotenv';
 import Client from './modules/client';
-dotenv.config({ path: join(__dirname, '.env') });
+dotenv.config();
 
 import config from './config';
 
