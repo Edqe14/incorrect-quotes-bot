@@ -10,6 +10,9 @@ module.exports = class ReadyListener extends Listener {
   }
 
   exec() {
-    console.log(`${this.client.user.tag} is ready!`);
+    console.log(`Logged in as ${this.client.user.tag}`);
+    // @ts-expect-error Check for remaining session restarts
+    console.log(`Restarts left: ${this.client.ws.sessionStartLimit.remaining}`);
+    this.client.user.setActivity({ type: 'PLAYING', name: 'p!gen Mi|Yu|Wi' });
   }
 };

@@ -1,17 +1,11 @@
 import { join } from 'path';
-import {
-  AkairoClient,
-  CommandHandler,
-  ListenerHandler,
-  InhibitorHandler,
-} from 'discord-akairo';
+import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
 import { configInterface } from '../config';
 
 export default class Client extends AkairoClient {
   public config: configInterface;
   public listenerHandler: ListenerHandler;
   public commandHandler: CommandHandler;
-  public inhibitorHandler: InhibitorHandler;
 
   constructor(config: configInterface) {
     super(
@@ -51,25 +45,19 @@ export default class Client extends AkairoClient {
       },
       ignorePermissions: this.config.ownerIDs,
     });
-    this.inhibitorHandler = new InhibitorHandler(this, {
-      directory: join(__dirname, '..', 'inhibitors'),
-    });
   }
 
   /**
    * Initialize handlers & listeners
    */
   _init(): void {
-    this.commandHandler
-      .useInhibitorHandler(this.inhibitorHandler)
-      .useListenerHandler(this.listenerHandler);
+    this.commandHandler.useListenerHandler(this.listenerHandler);
     this.listenerHandler.setEmitters({
       commandHandler: this.commandHandler,
       listenerHandler: this.listenerHandler,
       process,
     });
 
-    this.inhibitorHandler.loadAll();
     this.commandHandler.loadAll();
     this.listenerHandler.loadAll();
   }

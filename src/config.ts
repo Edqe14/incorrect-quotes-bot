@@ -3,9 +3,9 @@ export default {
     process.env.NODE_ENV === 'development'
       ? process.env.DEV_TOKEN
       : process.env.TOKEN,
-  prefix: '-', // Prefix
-  ownerIDs: ['id'], // Owner IDs
-  guildID: 'id',
+  prefix: 'p!', // Prefix
+  ownerIDs: ['326966683187281922'], // Owner IDs
+  guildID: '',
 };
 
 export interface configInterface {
